@@ -1,0 +1,19 @@
+/* Clean white background styles */
+.app {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Remove any borders or debug styles */
+.container {
+  background-color: #ffffff;
+}
+
+/* Ensure Material-UI components have proper background */
+.MuiContainer-root {
+  background-color: #ffffff;
+}
+
+.MuiPaper-root {
+  background-color: #ffffff;
+}
