@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Use environment variable for API URL
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Use environment variable for API URL - FIXED FALLBACK
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://company-registration-backend.onrender.com/api';
 
 console.log('API Configuration:', {
   baseURL: API_BASE_URL,
@@ -42,33 +42,29 @@ api.interceptors.response.use(
   }
 );
 
-// Auth API
+// Auth API - CORRECTED ROUTES (match your backend)
 export const authAPI = {
   register: (userData) => api.post('/auth/register', userData),
   login: (credentials) => api.post('/auth/login', credentials),
   getMe: () => api.get('/auth/me'),
 };
 
-// Company API
+// Company API - CORRECTED ROUTES (match your backend routes)
 export const companyAPI = {
-  getProfile: () => api.get('/company/profile'),
-  createProfile: (companyData) => api.post('/company/profile', companyData),
-  updateProfile: (companyData) => api.post('/company/profile', companyData),
+  // Your backend has GET /company and POST /company
+  getCompanies: () => api.get('/company'),
+  createCompany: (companyData) => api.post('/company', companyData),
+  updateCompany: (id, companyData) => api.put(`/company/${id}`, companyData),
+  deleteCompany: (id) => api.delete(`/company/${id}`),
+  
+  // File upload endpoints (you need to create these in backend)
   uploadLogo: (formData) => {
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     };
-    return api.post('/company/upload-logo', formData, config);
-  },
-  uploadBanner: (formData) => {
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    };
-    return api.post('/company/upload-banner', formData, config);
+    return api.post('/company/upload', formData, config); // Single upload endpoint
   },
 };
 
